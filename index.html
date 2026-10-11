@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YT-CLI</title>
+<meta name="description" content="YT-CLI is a read-only terminal app that shows your YouTube subscriptions. It reads data only.">
+<link rel="icon" href="/logo.png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p><img src="/logo.png" alt="YT-CLI logo" width="60" height="60"></p>
+  <h1>YT-CLI</h1>
+  <p class="tagline">A read-only YouTube client for the terminal.</p>
+</header>
+
+<p>YT-CLI is a terminal app that shows the YouTube subscriptions of the person
+who signs in. It asks Google for one permission,
+<code>https://www.googleapis.com/auth/youtube.readonly</code>, and it reads
+data only: it lists the channels you subscribe to, and it runs the searches you
+type. It cannot upload, comment, like, subscribe, unsubscribe, edit a playlist,
+or change any setting on your account.</p>
+
+<h2>What it does</h2>
+
+<p>YT-CLI reads your subscription list from the YouTube Data API, then fetches
+each channel's long-form uploads from YouTube's public RSS feeds and merges
+them into one grid, newest first. Arrow keys choose a video. Enter opens it in
+its normal YouTube watch page.</p>
+
+<p>There is no home page, no recommendation feed, no Shorts, no trending page,
+no comments, no likes, and no autoplay.</p>
+
+<pre><code>YT-CLI login        # approve read-only access
+YT-CLI              # your subscriptions
+YT-CLI search       # find one specific video</code></pre>
+
+<h2>Your data</h2>
+
+<p>The <a href="/privacy.html">privacy policy</a> says what YT-CLI accesses,
+how it uses it, where it is stored, and who it is shared with. You can revoke
+YT-CLI's access at any time from your
+<a href="https://myaccount.google.com/permissions">Google account permissions</a>
+page, or by running <code>YT-CLI logout --forget-account</code>.</p>
+
+<h2>Source</h2>
+
+<p>YT-CLI is open source. The downloadable command is one self-contained file
+with no dependencies outside the Python standard library, and the sign-in
+service is in the same repository.</p>
+
+<p><a href="https://github.com/Paul-H-W-J/youtube-cli">github.com/Paul-H-W-J/youtube-cli</a></p>
+
+<h2>Contact</h2>
+
+<p>YT-CLI is made by Paul Ho Wei Jian. Write to
+<a href="mailto:paulhoweijian@gmail.com">paulhoweijian@gmail.com</a>.</p>
+
+<footer>
+  <p>
+    <a href="/privacy.html">Privacy policy</a> ·
+    <a href="/terms.html">Terms of service</a>
+  </p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+:root {
+  --bg: #fbfaf8;
+  --fg: #1c1b19;
+  --muted: #6b6862;
+  --rule: #e2ded7;
+  --accent: #8a3324;
+  --code-bg: #efece6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17171a;
+    --fg: #f2f0ed;
+    --muted: #9d9a94;
+    --rule: #2e2e33;
+    --accent: #d98b6a;
+    --code-bg: #232327;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 17px/1.65 ui-serif, Georgia, "Times New Roman", serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.wrap {
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+}
+
+header { margin-bottom: 3rem; }
+
+h1 {
+  font-size: 1.9rem;
+  line-height: 1.2;
+  margin: 0 0 .4rem;
+  letter-spacing: -0.01em;
+}
+
+.tagline { color: var(--muted); margin: 0; }
+
+h2 {
+  font-size: 1.15rem;
+  margin: 2.75rem 0 .75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+h3 { font-size: 1rem; margin: 1.75rem 0 .5rem; }
+
+p, li { margin: 0 0 1rem; }
+
+ul { padding-left: 1.25rem; }
+
+li { margin-bottom: .45rem; }
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+code, pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .875em;
+}
+
+code { background: var(--code-bg); padding: .1em .35em; border-radius: 3px; }
+
+pre {
+  background: var(--code-bg);
+  padding: .9rem 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+pre code { background: none; padding: 0; }
+
+footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+footer a { color: var(--muted); }
+
+.todo {
+  background: #fff4d6;
+  border: 1px solid #e8cd85;
+  color: #5c4708;
+  padding: .85rem 1rem;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  .todo { background: #33280d; border-color: #6b5518; color: #f0dda6; }
+}
+
+.meta { color: var(--muted); font-size: .9rem; }

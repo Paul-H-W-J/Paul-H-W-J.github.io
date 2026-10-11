@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy policy — YT-CLI</title>
+<meta name="description" content="How YT-CLI accesses, uses, stores, and shares Google user data.">
+<link rel="icon" href="/logo.png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Privacy policy</h1>
+  <p class="meta">YT-CLI · Effective 9 October 2026 · <a href="/">Home</a></p>
+</header>
+
+<p>This policy covers YT-CLI, a read-only YouTube client for the terminal, and
+the YT-CLI sign-in service. Both are operated by Paul Ho Wei Jian. This policy
+says what Google user data YT-CLI accesses, how it uses that data, where the
+data is stored, and who the data is shared with.</p>
+
+<h2>1. What YT-CLI accesses</h2>
+
+<p>YT-CLI requests exactly two OAuth scopes:</p>
+
+<ul>
+  <li><code>https://www.googleapis.com/auth/youtube.readonly</code> — read-only
+  access to your YouTube account. YT-CLI uses it to list the channels you
+  subscribe to, and to run the searches you type.</li>
+  <li><code>openid</code> — an opaque, stable identifier for your Google
+  account (the <code>sub</code> claim). The sign-in service uses it to
+  recognise you when you return and to apply the shared daily search limit. It
+  is not your email address and cannot be read as one.</li>
+</ul>
+
+<p>YT-CLI requests no other scope. It does not request your name, your email
+address, your profile picture, your watch history, or your watch-later list.
+Read-only means read-only: YT-CLI cannot upload, comment, like, rate,
+subscribe, unsubscribe, edit a playlist, or change any setting on your
+account.</p>
+
+<h2>2. How YT-CLI uses the data</h2>
+
+<p>Only to make the client work:</p>
+
+<ul>
+  <li>to show your subscription list and its long-form uploads in the terminal
+  grid;</li>
+  <li>to run the YouTube searches you ask for and show the results;</li>
+  <li>to stop any one account from exhausting the daily search allowance that
+  all users share.</li>
+</ul>
+
+<p>Google user data is never used for advertising, never used to build a
+profile of you, never sold, and never used to train a machine-learning or AI
+model. It is not used for any purpose other than the three above.</p>
+
+<h2>3. Where the data is stored</h2>
+
+<p>YT-CLI can sign in two ways, and they store different things.</p>
+
+<h3>With your own Google credentials (local only)</h3>
+
+<p>If you supply your own OAuth client with
+<code>YT-CLI login --client-secret</code>, your machine talks to Google
+directly. The OAuth token is written to <code>~/.yt-cli/token.json</code> on
+your own computer, with private file permissions. No server of ours receives
+your token or your YouTube data.</p>
+
+<h3>Through the YT-CLI sign-in service (the default)</h3>
+
+<p>Plain <code>YT-CLI login</code> uses the YT-CLI sign-in service, so that you
+do not have to create a Google Cloud project. The service runs on Supabase. It
+stores the minimum needed to act on your behalf:</p>
+
+<ul>
+  <li><strong>The opaque Google account identifier</strong> described in
+  section 1.</li>
+  <li><strong>A Google refresh token, encrypted at rest.</strong> This is what
+  lets the service read your subscription list and run searches without asking
+  you to sign in again.</li>
+  <li><strong>A session record.</strong> Your terminal receives a random
+  session token; the service stores only a one-way hash of it, with the times
+  it was created and last used.</li>
+  <li><strong>A daily search count.</strong> One number per account per day.
+  The search terms themselves are not stored.</li>
+  <li><strong>Server and rate-limit records.</strong> The hosting platform may
+  log a request with an IP address and a timestamp. For rate limiting, the
+  service converts the address at once into a keyed, one-way identifier; that
+  identifier, not the address, may remain for up to one day.</li>
+</ul>
+
+<p>Either way, your subscription list is cached on your own computer, and the
+uploads grid is fetched by your own computer straight from YouTube's public RSS
+feeds. Which videos you open is never sent to us.</p>
+
+<h2>4. What is never stored</h2>
+
+<ul>
+  <li>Which videos you watch.</li>
+  <li>Your name, email address, or profile picture.</li>
+  <li>Your search terms, once the search returns.</li>
+  <li>Your subscription list, once it reaches your computer.</li>
+  <li>Your Google password. Sign-in happens only on Google's own pages.</li>
+</ul>
+
+<h2>5. Who the data is shared with</h2>
+
+<p><strong>Nobody.</strong> Google user data obtained through YT-CLI is not
+sold, not rented, not transferred, and not shared with any third party. The
+only outbound requests YT-CLI makes with your data are to Google's own APIs,
+on your behalf. The one exception is disclosure compelled by law.</p>
+
+<p>YT-CLI uses Supabase purely as the hosting platform for the sign-in service.
+Supabase processes the stored records on our instructions as a service
+provider; it is not given the data for its own use.</p>
+
+<h2>6. Google API Services User Data Policy</h2>
+
+<p>YT-CLI's use and transfer of information received from Google APIs to any
+other app will adhere to the
+<a href="https://developers.google.com/terms/api-services-user-data-policy">Google
+API Services User Data Policy</a>, including the
+<a href="https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes">Limited
+Use</a> requirements.</p>
+
+<p>YT-CLI is a YouTube API Services client. By using it you are also bound by
+the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>.
+Google's own handling of your data is described in the
+<a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</p>
+
+<h2>7. Revoking access, retention, and deletion</h2>
+
+<p>You can revoke YT-CLI's access to your Google account at any time at
+<a href="https://myaccount.google.com/permissions">https://myaccount.google.com/permissions</a>.
+Revoking makes any stored token useless immediately.</p>
+
+<p>To revoke access and delete your stored record in one step, run:</p>
+
+<pre><code>YT-CLI logout --forget-account</code></pre>
+
+<p>Your account record and encrypted token are kept until you delete them.
+Daily search counts are discarded after 30 days. Unfinished sign-in attempts
+are discarded within minutes. If you cannot run the command above, write to
+<a href="mailto:paulhoweijian@gmail.com">paulhoweijian@gmail.com</a> and your
+record will be deleted.</p>
+
+<h2>8. Security</h2>
+
+<p>Refresh tokens are encrypted at rest. Session tokens and sign-in codes are
+stored only as one-way hashes, so a copy of the database yields no usable
+credential. All traffic to the service uses HTTPS. On your own computer,
+<code>~/.yt-cli/</code> is created with private file permissions. No system is
+perfectly secure, and no guarantee of absolute security is offered.</p>
+
+<h2>9. Children</h2>
+
+<p>YT-CLI is not directed at children under 13, and accounts for children are
+not knowingly served.</p>
+
+<h2>10. Changes</h2>
+
+<p>If this policy changes materially, the effective date at the top will change
+and the new version will be published on this page before it takes effect.</p>
+
+<h2>11. Contact</h2>
+
+<p>Questions about this policy, or requests about your data, go to
+<a href="mailto:paulhoweijian@gmail.com">paulhoweijian@gmail.com</a>.</p>
+
+<footer>
+  <p><a href="/">YT-CLI</a> · <a href="/terms.html">Terms of service</a></p>
+</footer>
+
+</div>
+</body>
+</html>
